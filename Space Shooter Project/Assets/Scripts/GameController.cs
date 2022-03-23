@@ -118,7 +118,7 @@ public class GameController : MonoBehaviour
         scoreText.text = "Points:" + score;
         if (score >= 300)
         {
-            gameOverText.text = "You win! Game Created By William Beatty";
+            gameOverText.text = "You win! Press Escape to Quit!";
             gameOver = true;
             restart = true;
             oneTime++;
