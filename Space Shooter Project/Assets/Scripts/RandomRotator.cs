@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RandomRotator : MonoBehaviour
 {
-        private Rigidbody rb;
+    private Rigidbody rb;
 
     public float tumble;
 

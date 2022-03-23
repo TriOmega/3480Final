@@ -4,20 +4,38 @@ using UnityEngine;
 
 public class PowerUp : MonoBehaviour
 {
-    public float boost = 1.4f;
-    public float rateup = .8f;
-    public float duration;
-    public GameObject pickupEffect;
 
+
+    #region Components
+
+
+    [Header("Components")]
+    [SerializeField] private float boost = 1.4f;
+    [SerializeField] private float rateup = .8f;
+    [SerializeField] private float duration;
+    [SerializeField] private GameObject pickupEffect;
+
+
+    #endregion Components
+
+
+    #region Methods
+
+
+    //----------------------------------//
     void OnTriggerEnter (Collider other)
+    //----------------------------------//
     {
         if (other.CompareTag("Player"))
         {
-            StartCoroutine (Pickup(other));
+            StartCoroutine (IPickup(other));
         }
-    }
 
-    IEnumerator Pickup (Collider player)
+    }//END OnTriggerEnter
+
+    //----------------------------------//
+    IEnumerator IPickup (Collider player)
+    //----------------------------------//
     {
         Instantiate(pickupEffect, transform.position, transform.rotation);
 
@@ -36,5 +54,11 @@ public class PowerUp : MonoBehaviour
         playerController.fireRate /= rateup;
 
         Destroy(gameObject);
-    }
-}
+
+    }//END IPickup
+
+
+    #endregion Methods
+
+
+}//END CLASS PowerUp

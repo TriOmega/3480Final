@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Mover : MonoBehaviour
 {
-    public float speed;
+    [SerializeField] float speed;
 
     private Rigidbody rb;
 
@@ -12,4 +12,5 @@ public class Mover : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.velocity = transform.forward * speed;
     }
-}
+
+}//END Mover

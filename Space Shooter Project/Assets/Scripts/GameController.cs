@@ -6,19 +6,31 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+
+
+    #region Components
+
+
     public GameObject[] hazards;
+
     public Vector3 spawnValues;
+
     public int hazardCount;
+
     public float spawnWait;
     public float startWait;
     public float waveWait;
+
     public Text scoreText;
     public Text restartText;
     public Text gameOverText;
+
     public AudioSource musicSource;
+
     public AudioClip musicClipOne;
     public AudioClip musicClipTwo;
     public AudioClip musicClipThree;
+
     public float BGAccel;
 
     private int score;
@@ -27,7 +39,15 @@ public class GameController : MonoBehaviour
     private GameObject background;
     private int oneTime;
 
+
+    #endregion Components
+
+
+    #region Methods
+
+    //----------------------------//
     void Start()
+    //----------------------------//
     {
         restart = false;
         gameOver = false;
@@ -35,26 +55,31 @@ public class GameController : MonoBehaviour
         gameOverText.text = "";
         score = 0;
         UpdateScore();
-        StartCoroutine(SpawnWaves());
+        StartCoroutine(ISpawnWaves());
         musicSource.clip = musicClipThree;
         musicSource.Play();
         musicSource.loop = true;
         background = GameObject.Find("Background");
         oneTime = 0;
-    }
 
+    }//END Start
+
+    //----------------------------//
     void Update()
+    //----------------------------//
     {
         if (restart)
         {
             if (Input.GetKeyDown(KeyCode.Y))
             {
-                SceneManager.LoadScene("SampleScene");
+                SceneManager.LoadScene(0);
             }
         }
-    }
+    }//END Update
 
-    IEnumerator SpawnWaves()
+    //----------------------------//
+    IEnumerator ISpawnWaves()
+    //----------------------------//
     {
         yield return new WaitForSeconds(startWait);
         while (true)
@@ -76,14 +101,19 @@ public class GameController : MonoBehaviour
                 break;
             }
         }
-    }
+    }//END ISpawnWaves
+
+    //----------------------------//
     public void AddScore(int newScoreValue)
+    //----------------------------//
     {
         score += newScoreValue;
         UpdateScore();
-    }
+    }//END AddScore
 
+    //----------------------------//
     void UpdateScore()
+    //----------------------------//
     {
         scoreText.text = "Points:" + score;
         if (score >= 300)
@@ -100,24 +130,33 @@ public class GameController : MonoBehaviour
                 StartCoroutine(BGSpeedUp());
             }
         }
-    }
 
-    IEnumerator BGSpeedUp() 
-    { 
+    }//END UpdateScore
+
+    //----------------------------//
+    IEnumerator BGSpeedUp()
+    //----------------------------//
+    {
         while (background.GetComponent<BGScroller>().scrollSpeed > -75f)
         {
             yield return new WaitForSeconds(BGAccel);
             background.GetComponent<BGScroller>().scrollSpeed *= 1.01f;
         }
-    }
 
+    }//END BGSpeedUp
 
+    //----------------------------//
     public void GameOver()
+    //----------------------------//
     {
-            gameOverText.text = "Game Over!";
+        gameOverText.text = "Game Over!";
             gameOver = true;
             musicSource.clip = musicClipTwo;
             musicSource.Play();
             musicSource.loop = false;
-    }
-}
+    }//END GameOver
+
+    #endregion Methods
+
+
+}//END CLASS GameController

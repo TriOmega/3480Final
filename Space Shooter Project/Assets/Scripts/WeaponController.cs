@@ -4,25 +4,34 @@ using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
-    public GameObject shot;
-    public Transform shotSpawn;
-    public float fireRate;
-    public float delay;
-    public AudioSource musicSource;
-    public AudioClip musicClipOne;
+    [SerializeField] private GameObject shot;
 
+    [SerializeField] private Transform shotSpawn;
+
+    [SerializeField] private float fireRate;
+    [SerializeField] private float delay;
+
+    [SerializeField] private AudioSource musicSource;
+
+    [SerializeField] private AudioClip musicClipOne;
+
+    //--------------------------//
     void Start()
+    //--------------------------//
     {
         InvokeRepeating ("Fire", delay, fireRate) ;
         musicSource = GetComponent<AudioSource>();
-    }
 
+    }//END Start
+
+    //--------------------------//
     void Fire ()
+    //--------------------------//
     {
         Instantiate (shot, shotSpawn.position, shotSpawn.rotation);
 
         musicSource.clip = musicClipOne;
         musicSource.Play();
-    }
+    }//END Fire
 
 }

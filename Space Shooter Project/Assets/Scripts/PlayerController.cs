@@ -5,28 +5,47 @@ using System.Collections;
 public class Boundary
 {
     public float xMin, xMax, zMin, zMax;
-}
+
+}//END CLASS Boundary
 
 public class PlayerController : MonoBehaviour
 {
+
+
+    #region Components
+
+
+    [Header("Components")]
     public float speed;
-    public float tilt;
-    public Boundary boundary;
-    public GameObject shot;
-    public Transform shotSpawn;
+    [SerializeField] private float tilt;
+    [SerializeField] private Boundary boundary;
+    [SerializeField] private GameObject shot;
+    [SerializeField] private Transform shotSpawn;
     public float fireRate;
-    public AudioSource musicSource;
-    public AudioClip musicClipOne;
+    [SerializeField] private AudioSource musicSource;
+    [SerializeField] private AudioClip musicClipOne;
 
     private Rigidbody rb;
     private float nextFire;
 
+
+    #endregion Components
+
+
+    #region Methods
+
+
+    //-------------------------------//
     private void Start()
+    //-------------------------------//
     {
         rb = GetComponent<Rigidbody>();
-    }
 
+    }//END Start
+
+    //-------------------------------//
     void Update()
+    //-------------------------------//
     {
         if (Input.GetButton("Fire1") && Time.time > nextFire)
         {
@@ -35,9 +54,12 @@ public class PlayerController : MonoBehaviour
             musicSource.clip = musicClipOne;
             musicSource.Play();
         }
-    }
 
+    }//END Update
+
+    //-------------------------------//
     void FixedUpdate()
+    //-------------------------------//
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
@@ -53,5 +75,10 @@ public class PlayerController : MonoBehaviour
         );
 
         rb.rotation = Quaternion.Euler(0.0f, 0.0f, rb.velocity.x * -tilt);
-    }
-}
+    }//END FixedUpdate
+
+
+    #endregion Methods
+
+
+}//END CLASS PlayerController
